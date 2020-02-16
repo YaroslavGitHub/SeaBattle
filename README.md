@@ -1,0 +1,2 @@
+# SeaBattle
+simple seabattle game
