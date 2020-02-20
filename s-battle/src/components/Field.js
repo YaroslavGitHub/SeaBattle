@@ -37,6 +37,11 @@ class Field extends Component {
             {ship: true, shot: false},
             {ship: false, shot: true},
             {ship: true, shot: false},
+            {ship: true, shot: true},
+            {ship: false, shot: true},
+            {ship: true, shot: false},
+            {ship: false, shot: true},
+            {ship: true, shot: false},
             {ship: true, shot: true}
         ]
 
@@ -44,6 +49,7 @@ class Field extends Component {
 
     render() {
         return (
+            <div className="grid-container">
             <>
             {this.state.seaMap.map(field => (
                 <div style={{ color: (field.shot && field.ship)? 'tomato' 
@@ -54,6 +60,7 @@ class Field extends Component {
             ))}
                 
             </>
+            </div>
         )
     }
 }

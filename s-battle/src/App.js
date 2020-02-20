@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css"
 import Field from './components/Field'
 function App(props) {
 
@@ -33,7 +35,8 @@ function App(props) {
   return (
     <div className="App">
     
-          SEA BATTLE
+    
+          <h1 className="font-weight-bold">SEA BATTLE</h1>
           <h1>X={fieldA} Y={fieldB}</h1>
 
           <h1>{shipCount.length}</h1>
@@ -47,6 +50,7 @@ function App(props) {
           value={fieldA}
           onChange={e => setA(e.target.value)}
           min="0" max="9"
+          className="form-group"
         />
       </label>
       <label>
@@ -58,14 +62,20 @@ function App(props) {
           min="0" max="9"
         />
       </label>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" className="btn btn-light"/>
     </form>
     
   
-          <div className="grid-container">
+          <div className="container">
           <Field />
 
         </div> 
+        <Router>
+        <div className="container">
+        <br/>
+        <Route path="/field" exact component={Field} />
+        </div>
+        </Router>
   
     </div>
   );
