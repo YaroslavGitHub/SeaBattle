@@ -1,21 +1,45 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
-class FieldItem extends Component {
-    constructor() {
-        super();
+export default class FieldItem extends Component {
+    constructor(props) {
+      super(props);
         this.state = {
-            ship: true, 
-            shot: false 
-        }
+            seaMap: []
+            
+        } 
     }
-    render() {
-        const { ship, shot } = this.state;
+    
+    
+    componentDidMount() {
+
+    
+        axios.get('http://localhost:5000/shots/')
+          .then(response => {
+            if (response.data.length > 0) {
+              this.setState({
+                seaMap: response.data
+              })
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          console.log(this.seaMap)
+      }
+      
+      render() {
         return (
-            <div>
-                <h2>{ship}</h2>
+            <div className="grid-container">
+            <>
+            {this.state.seaMap.map(shot => (
+                <div style={{ color: (shot.shot)? 'red' 
+                : (!shot.shot)? 'green'
+                : 'blue'}}>X {shot._id}</div>
+            ))}
+                
+            </>
             </div>
         )
     }
 }
-
-export default FieldItem

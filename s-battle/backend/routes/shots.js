@@ -8,15 +8,19 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+  const _id = req.body._id;
   const gamer = req.body.gamer;
   const fieldA = req.body.fieldA;
   const fieldB = req.body.fieldB;
+  const shot = req.body.shot;
 
 
   const newShot = new Shot({
+    _id,
     gamer,
     fieldA,
-    fieldB
+    fieldB,
+    shot
   });
 
   newShot.save()
@@ -24,30 +28,36 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
-  Exercise.findById(req.params.id)
-    .then(shot => res.json(shot))
+router.route('/find').get((req, res) => {
+  Shot.find(req.params.shot)
+    .then(shot => {
+      shot.gamer = req.body.gamer;
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
-  Exercise.findByIdAndDelete(req.params.id)
+router.route('/del').delete((req, res) => {
+  Shot.findByIdAndDelete(req.params.name)
     .then(() => res.json('shot deleted!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/update/:id').post((req, res) => {
-  Exercise.findById(req.params.id)
+  Shot.findById(req.params.id)
     .then(shot => {
       shot.gamer = req.body.gamer;
       shot.fieldA = req.body.fieldA;
       shot.fieldB = req.body.fieldB;
+      shot.shot = req.body.shot;
 
       shot.save()
         .then(() => res.json('shot updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
+
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/test').get((req, res) => res.send(' test'));
 
 module.exports = router;

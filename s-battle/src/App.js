@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import Field from './components/Field'
+import Field from './components/FieldItem';
+import Shot from './components/Shot';
+import ShotUpdate from './components/ShotUpdate'
+import Play from './components/Play'
 function App(props) {
 
    const [fieldA, setA] = useState("");
@@ -62,18 +65,22 @@ function App(props) {
           min="0" max="9"
         />
       </label>
-      <input type="submit" value="Submit" className="btn btn-light"/>
+      <input type="submit" value="Submit"  className="btn btn-light"/>
     </form>
     
   
           <div className="container">
           <Field />
+          <Shot />
+ 
+          <ShotUpdate />
 
         </div> 
         <Router>
         <div className="container">
         <br/>
-        <Route path="/field" exact component={Field} />
+        <Route path="/" exact component={Field} />
+        <Route path="/play" exact component={Play} />
         </div>
         </Router>
   
