@@ -47,6 +47,7 @@ export default class Shot extends Component {
       .then(res => console.log(res.data));
 
   }
+  
 
   render() {
     return (
@@ -75,8 +76,9 @@ export default class Shot extends Component {
         className="form-group"
         />
       </label>
-      <input type="submit" value="Submit"  className="btn btn-light"/>
+      <input type="submit" value="Only fo test - add new field item"  className="btn btn-danger"/>
     </form>
+    To see field please press 
     </div>
     )
   }

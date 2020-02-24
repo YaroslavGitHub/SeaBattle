@@ -28,19 +28,7 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/find').get((req, res) => {
-  Shot.find(req.params.shot)
-    .then(shot => {
-      shot.gamer = req.body.gamer;
-    })
-    .catch(err => res.status(400).json('Error: ' + err));
-});
 
-router.route('/del').delete((req, res) => {
-  Shot.findByIdAndDelete(req.params.name)
-    .then(() => res.json('shot deleted!'))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
 
 router.route('/update/:id').post((req, res) => {
   Shot.findById(req.params.id)
@@ -58,6 +46,5 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/test').get((req, res) => res.send(' test'));
 
 module.exports = router;

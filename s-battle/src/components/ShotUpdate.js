@@ -14,9 +14,11 @@ export default class ShotUpdate extends Component {
         gamer: 'first',
         fieldA: 0,
         fieldB: 0,
-        shot: true
+        shot: true,
+        seaMap: []
       }
   }
+  
 
   onChangefieldA(e) {
     this.setState({
@@ -30,6 +32,7 @@ export default class ShotUpdate extends Component {
   }
 
   onSubmit(e) {
+  
     e.preventDefault();
 
     const shot = {
@@ -39,19 +42,52 @@ export default class ShotUpdate extends Component {
       shot: this.state.shot
     }
 
-    console.log(shot);
+    
 
-    axios.post('http://localhost:5000/shots/update/' + this.state.fieldA + this.state.fieldB, shot)
+    alert(" U shoot on fieid: " + this.state.fieldA + this.state.fieldB);
+
+       axios.post('http://localhost:5000/shots/update/' + this.state.fieldA + this.state.fieldB, shot)
       .then(res => console.log(res.data));
 
+       
+    
+
+  }
+  componentDidMount() {
+    axios.get('http://localhost:5000/shots/')
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({
+            seaMap: response.data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      console.log(this.seaMap)
+  }
+
+  componentDidUpdate() {
+    axios.get('http://localhost:5000/shots/')
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({
+            seaMap: response.data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      console.log(this.seaMap)
   }
 
   render() {
     return (
-
-    
-        
       <div>
+      <h1 className="font-weight-bold">SEA BATTLE</h1>
+      <h1>X={this.state.fieldA} Y={this.state.fieldB}</h1>
       <form onSubmit={this.onSubmit}>
       <label>
         Input X :
@@ -73,8 +109,19 @@ export default class ShotUpdate extends Component {
         className="form-group"
         />
       </label>
-      <input type="submit" value="Update"  className="btn btn-light"/>
+      <input type="submit" value="Shot"  className="btn btn-light"/>
     </form>
+  
+    <div className="grid-container">
+            <>
+            {this.state.seaMap.map(shot => (
+                <div style={{ color: (shot.shot)? 'red' 
+                : (!shot.shot)? 'green'
+                : 'blue'}}>X {shot._id}</div>
+            ))}
+                
+            </>
+            </div>
     </div>
     )
   }

@@ -19,10 +19,8 @@ connection.once('open', () => {
 })
 
 const shotsRouter = require('./routes/shots');
-const gamersRouter = require('./routes/gamers');
 
 app.use('/shots', shotsRouter);
-app.use('/gamers', gamersRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
