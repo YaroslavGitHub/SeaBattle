@@ -1,30 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import Shot from './components/Shot';
-import ShotUpdate from './components/ShotUpdate'
+import ShotUpdate from './components/ShotUpdate';
 function App(props) {
 
    
-  return (
-    <div className="App">
+   return (
+      <div className="App">
     
   
-          <div className="container">
+         <div className="container">
 
-          <Shot />
-          <ShotUpdate />
+            <Shot />
+            <ShotUpdate />
 
-        </div> 
-        <Router>
-        <div  className="container">
-        <br/>
-        </div>
-        </Router>
+         </div> 
+         <Router>
+            <div  className="container">
+               <br/>
+            </div>
+         </Router>
   
-    </div>
-  );
+      </div>
+   );
 }
 
 export default App;
