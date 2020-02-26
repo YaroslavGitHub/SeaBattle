@@ -64,7 +64,7 @@ export default class ShotUpdate extends Component {
       console.log( this.seaMap );
    }
 
-   componentDidUpdate() {
+   /*componentDidUpdate() {
       axios.get( 'http://localhost:5000/shots/' )
          .then(( response ) => {
             if ( response.data.length > 0 ) {
@@ -77,7 +77,7 @@ export default class ShotUpdate extends Component {
             console.log( error );
          });
       console.log( this.seaMap );
-   }
+   }*/
 
    render() {
       return (
