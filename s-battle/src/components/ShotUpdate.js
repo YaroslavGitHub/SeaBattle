@@ -2,85 +2,81 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class ShotUpdate extends Component {
-   constructor(props) {
-      super(props);
+   constructor( props ) {
+      super( props );
 
-    
-      this.onChangefieldA = this.onChangefieldA.bind(this);
-      this.onChangefieldB = this.onChangefieldB.bind(this);
-      this.onSubmit = this.onSubmit.bind(this);
+
+      this.onChangefieldA = this.onChangefieldA.bind( this );
+      this.onChangefieldB = this.onChangefieldB.bind( this );
+      this.onSubmit = this.onSubmit.bind( this );
 
       this.state = {
          gamer: 'first',
          fieldA: 0,
          fieldB: 0,
          shot: true,
-         seaMap: []
+         seaMap: [],
       };
    }
-  
 
-   onChangefieldA(e) {
+
+   onChangefieldA( e ) {
       this.setState({
-         fieldA: e.target.value
-      });
-   }
-   onChangefieldB(e) {
-      this.setState({
-         fieldB: e.target.value
+         fieldA: e.target.value,
       });
    }
 
-   onSubmit(e) {
-  
+   onChangefieldB( e ) {
+      this.setState({
+         fieldB: e.target.value,
+      });
+   }
+
+   onSubmit( e ) {
       e.preventDefault();
 
       const shot = {
          gamer: this.state.gamer,
          fieldA: this.state.fieldA,
          fieldB: this.state.fieldB,
-         shot: this.state.shot
+         shot: this.state.shot,
       };
 
-    
 
-      alert(" U shoot on fieid: " + this.state.fieldA + this.state.fieldB);
+      alert( ` U shoot on fieid: ${this.state.fieldA}${this.state.fieldB}` );
 
-      axios.post('http://localhost:5000/shots/update/' + this.state.fieldA + this.state.fieldB, shot)
-         .then(res => console.log(res.data));
-
-       
-    
-
+      axios.post( `http://localhost:5000/shots/update/${this.state.fieldA}${this.state.fieldB}`, shot )
+         .then(( res ) => console.log( res.data ));
    }
+
    componentDidMount() {
-      axios.get('http://localhost:5000/shots/')
-         .then(response => {
-            if (response.data.length > 0) {
+      axios.get( 'http://localhost:5000/shots/' )
+         .then(( response ) => {
+            if ( response.data.length > 0 ) {
                this.setState({
-                  seaMap: response.data
+                  seaMap: response.data,
                });
             }
          })
-         .catch((error) => {
-            console.log(error);
+         .catch(( error ) => {
+            console.log( error );
          });
-      console.log(this.seaMap);
+      console.log( this.seaMap );
    }
 
    componentDidUpdate() {
-      axios.get('http://localhost:5000/shots/')
-         .then(response => {
-            if (response.data.length > 0) {
+      axios.get( 'http://localhost:5000/shots/' )
+         .then(( response ) => {
+            if ( response.data.length > 0 ) {
                this.setState({
-                  seaMap: response.data
+                  seaMap: response.data,
                });
             }
          })
-         .catch((error) => {
-            console.log(error);
+         .catch(( error ) => {
+            console.log( error );
          });
-      console.log(this.seaMap);
+      console.log( this.seaMap );
    }
 
    render() {
@@ -109,17 +105,19 @@ export default class ShotUpdate extends Component {
                      className="form-group"
                   />
                </label>
-               <input type="submit" value="Shot"  className="btn btn-light"/>
+               <input type="submit" value="Shot" className="btn btn-light"/>
             </form>
-  
+
             <div className="grid-container">
                <>
-                  {this.state.seaMap.map(shot => (
-                     <div style={{ color: (shot.shot)? 'red' 
-                        : (!shot.shot)? 'green'
-                           : 'blue'}}>X {shot._id}</div>
+                  {this.state.seaMap.map(( shot ) => (
+                     <div style={{
+                        color: ( shot.shot ) ? 'red'
+                           : ( !shot.shot ) ? 'green'
+                              : 'blue',
+                     }}>X {shot._id}</div>
                   ))}
-                
+
                </>
             </div>
          </div>

@@ -2,35 +2,36 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class Shot extends Component {
-   constructor(props) {
-      super(props);
+   constructor( props ) {
+      super( props );
 
-    
-      this.onChangefieldA = this.onChangefieldA.bind(this);
-      this.onChangefieldB = this.onChangefieldB.bind(this);
-      this.onSubmit = this.onSubmit.bind(this);
+
+      this.onChangefieldA = this.onChangefieldA.bind( this );
+      this.onChangefieldB = this.onChangefieldB.bind( this );
+      this.onSubmit = this.onSubmit.bind( this );
 
       this.state = {
          _id: 0,
          gamer: 'first',
          fieldA: 0,
          fieldB: 0,
-         shot: false
+         shot: false,
       };
    }
 
-   onChangefieldA(e) {
+   onChangefieldA( e ) {
       this.setState({
-         fieldA: e.target.value
-      });
-   }
-   onChangefieldB(e) {
-      this.setState({
-         fieldB: e.target.value
+         fieldA: e.target.value,
       });
    }
 
-   onSubmit(e) {
+   onChangefieldB( e ) {
+      this.setState({
+         fieldB: e.target.value,
+      });
+   }
+
+   onSubmit( e ) {
       e.preventDefault();
 
       const shot = {
@@ -38,22 +39,20 @@ export default class Shot extends Component {
          gamer: this.state.gamer,
          fieldA: this.state.fieldA,
          fieldB: this.state.fieldB,
-         shot: this.state.shot
+         shot: this.state.shot,
       };
 
-      console.log(shot);
+      console.log( shot );
 
-      axios.post('http://localhost:5000/shots/add/', shot)
-         .then(res => console.log(res.data));
-
+      axios.post( 'http://localhost:5000/shots/add/', shot )
+         .then(( res ) => console.log( res.data ));
    }
-  
+
 
    render() {
       return (
 
-    
-        
+
          <div>
             <form onSubmit={this.onSubmit}>
                <label>
@@ -76,9 +75,9 @@ export default class Shot extends Component {
                      className="form-group"
                   />
                </label>
-               <input type="submit" value="Only fo test - add new field item"  className="btn btn-danger"/>
+               <input type="submit" value="Only for test - add new field item" className="btn btn-danger"/>
             </form>
-    To see field please press 
+
          </div>
       );
    }
