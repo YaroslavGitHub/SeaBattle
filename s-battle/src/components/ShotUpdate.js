@@ -10,6 +10,7 @@ export default class ShotUpdate extends Component {
       this.onChangefieldB = this.onChangefieldB.bind( this );
       this.onSubmit = this.onSubmit.bind( this );
 
+
       this.state = {
          gamer: 'first',
          fieldA: 0,
@@ -41,13 +42,14 @@ export default class ShotUpdate extends Component {
          fieldB: this.state.fieldB,
          shot: this.state.shot,
       };
-
-
-      alert( ` U shoot on fieid: ${this.state.fieldA}${this.state.fieldB}` );
+ 
+      alert( ` U shoot on field: ${this.state.fieldA}${this.state.fieldB} to see result on Sea map please update page` );
 
       axios.post( `http://localhost:5000/shots/update/${this.state.fieldA}${this.state.fieldB}`, shot )
-         .then(( res ) => console.log( res.data ));
-   }
+         .then(( res ) => console.log( res.data ))
+
+     }
+   
 
    componentDidMount() {
       axios.get( 'http://localhost:5000/shots/' )
@@ -64,7 +66,7 @@ export default class ShotUpdate extends Component {
       console.log( this.seaMap );
    }
 
-   /*componentDidUpdate() {
+   UNSAFE_componentWillMount() {
       axios.get( 'http://localhost:5000/shots/' )
          .then(( response ) => {
             if ( response.data.length > 0 ) {
@@ -77,13 +79,15 @@ export default class ShotUpdate extends Component {
             console.log( error );
          });
       console.log( this.seaMap );
-   }*/
+   }
+   
+
 
    render() {
       return (
          <div>
             <h1 className="font-weight-bold">SEA BATTLE</h1>
-            <h1>X={this.state.fieldA} Y={this.state.fieldB}</h1>
+            <h1> U shot is X={this.state.fieldA} Y={this.state.fieldB} </h1>
             <form onSubmit={this.onSubmit}>
                <label>
         Input X :
@@ -109,13 +113,13 @@ export default class ShotUpdate extends Component {
             </form>
 
             <div className="grid-container">
-               <>
+            <>
                   {this.state.seaMap.map(( shot ) => (
-                     <div style={{
+                     <div><button  style={{
                         color: ( shot.shot ) ? 'red'
                            : ( !shot.shot ) ? 'green'
                               : 'blue',
-                     }}>X {shot._id}</div>
+                     }}>X {shot._id}</button></div>
                   ))}
 
                </>

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Shot from './components/Shot';
 import NewGame from './components/NewGame';
 import ShotUpdate from './components/ShotUpdate';
+import ShotHistory from './components/ShotHistory';
 
 function App( props ) {
    return (
@@ -14,6 +15,9 @@ function App( props ) {
          <div className="container">
 
             <Shot />
+            
+            <ShotHistory />
+            <br></br>
             <NewGame />
             <ShotUpdate />
 

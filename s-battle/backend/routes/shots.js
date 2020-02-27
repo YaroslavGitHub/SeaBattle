@@ -49,19 +49,25 @@ router.route('/update/:id').post((req, res) => {
 /*router.route('/find/:id').get((req, res) => {
    Shot.findById(req.params.id).then(shots => res.json(shots))
      .catch(err => res.status(400).json('Error: ' + err));
- });
+ });*/
 
 router.route('/findone/:id').post((req, res) => {
    Shot.findByIdAndUpdate( req.params.id, { shot: false})
      .then(shots => res.json(shots))
      .catch(err => res.status(400).json('Error: ' + err));
- });*/
+ });
 
  router.route('/all').post((req, res) => {
    Shot.updateMany( {_id: { $gte: 0 }}, { shot: false })    
    .then(shots => res.json(shots))
    .catch(err => res.status(400).json('Error: ' + err));
 });
-//updateMany({ name: /Stark$/ }, { isDeleted: true });
+
+router.route('/history').get((req, res) => {
+   Shot.find({ shot: true })
+     .then(shots => res.json(shots))
+     .catch(err => res.status(400).json('Error: ' + err));
+ });
+
 
 module.exports = router;
