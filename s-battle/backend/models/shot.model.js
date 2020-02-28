@@ -8,6 +8,7 @@ const mongoose = require( 'mongoose' ),
       fieldA: { type: Number, required: true },
       fieldB: { type: Number, required: true },
       shot: { type: Boolean, required: true, default: false },
+      ship: { type: Boolean, required: true }
    }),
 
    Shot = mongoose.model( 'Shot', shotSchema );

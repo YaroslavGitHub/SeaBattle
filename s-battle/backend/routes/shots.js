@@ -13,6 +13,7 @@ router.route('/add').post((req, res) => {
   const fieldA = req.body.fieldA;
   const fieldB = req.body.fieldB;
   const shot = req.body.shot;
+  const ship = req.body.ship;
 
 
   const newShot = new Shot({
@@ -20,7 +21,8 @@ router.route('/add').post((req, res) => {
     gamer,
     fieldA,
     fieldB,
-    shot
+    shot,
+    ship
   });
 
   newShot.save()
@@ -31,12 +33,13 @@ router.route('/add').post((req, res) => {
 
 
 router.route('/update/:id').post((req, res) => {
-  Shot.findById(req.params.id)
+   Shot.findById(req.params.id)
     .then(shot => {
       shot.gamer = req.body.gamer;
       shot.fieldA = req.body.fieldA;
       shot.fieldB = req.body.fieldB;
       shot.shot = req.body.shot;
+      shot.ship = req.body.ship;
 
       shot.save()
         .then(() => res.json('shot updated!'))
@@ -52,19 +55,24 @@ router.route('/update/:id').post((req, res) => {
  });*/
 
 router.route('/findone/:id').post((req, res) => {
-   Shot.findByIdAndUpdate( req.params.id, { shot: false})
+   Shot.findByIdAndUpdate(req.params.id,{ shot: true})
      .then(shots => res.json(shots))
      .catch(err => res.status(400).json('Error: ' + err));
  });
 
  router.route('/all').post((req, res) => {
-   Shot.updateMany( {_id: { $gte: 0 }}, { shot: false })    
+   Shot
+   .updateMany( {_id: { $gte: 0, $lte: 100 }}, { ship: false }) 
+   .updateMany( {_id: { $lte: 3 }}, { ship: true})
+   .updateMany( {_id: 18}, { ship: true})
+   .updateMany( {_id: { $gte: 25, $lte: 27 }}, { ship: true})
+   .updateMany( {_id: { $gte: 67, $lte: 68 }}, { ship: true})
    .then(shots => res.json(shots))
    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/history').get((req, res) => {
-   Shot.find({ shot: true })
+   Shot.find({ ship: true })
      .then(shots => res.json(shots))
      .catch(err => res.status(400).json('Error: ' + err));
  });

@@ -16,6 +16,7 @@ export default class ShotUpdate extends Component {
          fieldA: 0,
          fieldB: 0,
          shot: true,
+         ship: false,
          seaMap: [],
       };
    }
@@ -41,11 +42,12 @@ export default class ShotUpdate extends Component {
          fieldA: this.state.fieldA,
          fieldB: this.state.fieldB,
          shot: this.state.shot,
+         ship: this.state.ship
       };
  
       alert( ` U shoot on field: ${this.state.fieldA}${this.state.fieldB} to see result on Sea map please update page` );
 
-      axios.post( `http://localhost:5000/shots/update/${this.state.fieldA}${this.state.fieldB}`, shot )
+      axios.post( `http://localhost:5000/shots/findone/${this.state.fieldA}${this.state.fieldB}`)
          .then(( res ) => console.log( res.data ))
 
      }
@@ -116,7 +118,7 @@ export default class ShotUpdate extends Component {
             <>
                   {this.state.seaMap.map(( shot ) => (
                      <div><button  style={{
-                        color: ( shot.shot ) ? 'red'
+                        color: ( shot.shot && shot.ship ) ? 'red'
                            : ( !shot.shot ) ? 'green'
                               : 'blue',
                      }}>X {shot._id}</button></div>
