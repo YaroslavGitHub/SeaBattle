@@ -9,6 +9,7 @@ export default class ShotUpdate extends Component {
       this.onChangefieldA = this.onChangefieldA.bind( this );
       this.onChangefieldB = this.onChangefieldB.bind( this );
       this.onSubmit = this.onSubmit.bind( this );
+      this.onClick = this.onClick.bind( this );
 
 
       this.state = {
@@ -16,7 +17,7 @@ export default class ShotUpdate extends Component {
          fieldA: 0,
          fieldB: 0,
          shot: true,
-         ship: false,
+         description: '',
          seaMap: [],
       };
    }
@@ -34,24 +35,27 @@ export default class ShotUpdate extends Component {
       });
    }
 
+   onClick( e ) {
+      e.preventDefault();
+
+
+      alert( ` U shoot on field: ${this.state.fieldA}${this.state.fieldB} to see result on Sea map please update page` );
+
+      axios.post( `http://localhost:5000/shots/findone/${this.state.fieldA}${this.state.fieldB}` )
+         .then(( res ) => console.log( res.data ));
+   }
+
    onSubmit( e ) {
       e.preventDefault();
 
-      const shot = {
-         gamer: this.state.gamer,
-         fieldA: this.state.fieldA,
-         fieldB: this.state.fieldB,
-         shot: this.state.shot,
-         ship: this.state.ship
+      const text = {
+         description: `U press ${this.state.fieldA}${this.state.fieldA}`,
       };
- 
-      alert( ` U shoot on field: ${this.state.fieldA}${this.state.fieldB} to see result on Sea map please update page` );
 
-      axios.post( `http://localhost:5000/shots/findone/${this.state.fieldA}${this.state.fieldB}`)
-         .then(( res ) => console.log( res.data ))
 
-     }
-   
+      axios.post( 'http://localhost:5000/history/add', text )
+         .then(( res ) => console.log( res.data ));
+   }
 
    componentDidMount() {
       axios.get( 'http://localhost:5000/shots/' )
@@ -82,7 +86,6 @@ export default class ShotUpdate extends Component {
          });
       console.log( this.seaMap );
    }
-   
 
 
    render() {
@@ -90,7 +93,7 @@ export default class ShotUpdate extends Component {
          <div>
             <h1 className="font-weight-bold">SEA BATTLE</h1>
             <h1> U shot is X={this.state.fieldA} Y={this.state.fieldB} </h1>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} >
                <label>
         Input X :
                   <input
@@ -111,17 +114,19 @@ export default class ShotUpdate extends Component {
                      className="form-group"
                   />
                </label>
-               <input type="submit" value="Shot" className="btn btn-light"/>
+               <input type="submit" value="Shot" onClick={this.onClick} className="btn btn-light"/>
             </form>
 
             <div className="grid-container">
-            <>
+               <>
                   {this.state.seaMap.map(( shot ) => (
-                     <div><button  style={{
+                     <div><div style={{
                         color: ( shot.shot && shot.ship ) ? 'red'
-                           : ( !shot.shot ) ? 'green'
-                              : 'blue',
-                     }}>X {shot._id}</button></div>
+                           : ( !shot.shot && shot.ship ) ? 'green'
+                              : ( !shot.shot && !shot.ship ) ? 'green'
+                                 : ( shot.shot && !shot.ship ) ? 'blue'
+                                    : 'orange',
+                     }}>X {shot._id}</div></div>
                   ))}
 
                </>

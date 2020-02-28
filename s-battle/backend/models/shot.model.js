@@ -7,7 +7,7 @@ const mongoose = require( 'mongoose' ),
       gamer: { type: String, required: true },
       fieldA: { type: Number, required: true },
       fieldB: { type: Number, required: true },
-      shot: { type: Boolean, required: true, default: false },
+      shot: { type: Boolean, required: true },
       ship: { type: Boolean, required: true }
    }),
 

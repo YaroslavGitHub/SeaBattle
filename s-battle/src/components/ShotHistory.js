@@ -9,14 +9,14 @@ export default class ShotHistory extends Component {
       this.onSubmit = this.onSubmit.bind( this );
 
       this.state = {
-         seaMap: []
+         seaMap: [],
       };
    }
 
 
    onSubmit( e ) {
       e.preventDefault();
-      axios.get( 'http://localhost:5000/shots/history' )
+      axios.get( 'http://localhost:5000/history' )
          .then(( response ) => {
             if ( response.data.length > 0 ) {
                this.setState({
@@ -44,9 +44,6 @@ export default class ShotHistory extends Component {
          });
       console.log( this.seaMap );
    }
-   
-
-
 
 
    render() {
@@ -58,17 +55,13 @@ export default class ShotHistory extends Component {
 
                <input type="submit" value="Shot history" className="btn btn-info"/>
             </form>
-            <div className="grid-container">
-            <>
-                  {this.state.seaMap.map(( shot ) => (
-                     <div><button  style={{
-                        color: ( shot.shot ) ? 'red'
-                           : ( !shot.shot ) ? 'green'
-                              : 'blue',
-                     }}>X {shot._id}</button></div>
-                  ))}
+            <div>
 
-               </>
+               {this.state.seaMap.map(( shot ) => (
+                  <div>{shot.description}</div>
+               ))}
+
+
             </div>
 
          </div>

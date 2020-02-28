@@ -18,8 +18,10 @@ connection.once( 'open', () => {
 });
 
 const shotsRouter = require( './routes/shots' );
+const historyRouter = require( './routes/history' );
 
 app.use( '/shots', shotsRouter );
+app.use( '/history', historyRouter );
 
 app.listen( port, () => {
    console.log( `Server is running on port: ${port}` );

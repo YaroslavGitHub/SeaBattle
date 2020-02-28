@@ -12,7 +12,7 @@ export default class NewGame extends Component {
 
    onSubmit( e ) {
       e.preventDefault();
-      axios.post( 'http://localhost:5000/shots/all/' )
+      axios.post( 'http://localhost:5000/shots/all/' );
    }
 
    componentDidMount() {
@@ -31,14 +31,12 @@ export default class NewGame extends Component {
    }
 
 
-
-
    render() {
       return (
 
 
          <div>
-         After press "Restart shots" please update page
+         <h4>After press "Restart shots" please update page</h4>
             <form onSubmit={this.onSubmit}>
 
                <input type="submit" value="Restart shots" className="btn btn-warning"/>
