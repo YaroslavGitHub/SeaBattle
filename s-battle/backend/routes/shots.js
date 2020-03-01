@@ -61,12 +61,10 @@ router.route('/findone/:id').post((req, res) => {
  });
 
  router.route('/all').post((req, res) => {
-   Shot
-   .updateMany( {_id: { $lt: 100 }}, { shot: false })
-   .updateMany( {_id: { $lte: 3 }}, { ship: true})
-   .updateMany( {_id: 18}, { ship: true})
-   .updateMany( {_id: { $gte: 25, $lte: 27 }}, { ship: true})
-   .updateMany( {_id: { $gte: 67, $lte: 68 }}, { ship: true})
+   Shot.updateMany({}, {}).set({ shot: false})
+   .then(Shot.updateMany({}, {}).set({ ship: false}))
+   .then(Shot.updateMany( {_id: { $gte: 67, $lte: 68 }}, { ship: true}))
+   .then(Shot.updateMany( {_id: { $gte: 55, $lte: 57 }}, { ship: true}))
    .then(shots => res.json(shots))
    .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -77,5 +75,8 @@ router.route('/history').get((req, res) => {
      .catch(err => res.status(400).json('Error: ' + err));
  });
 
+
+ /*.updateMany( {_id: { $gte: 67, $lte: 68 }}, { ship: true})
+ .updateMany( {_id: { $lt: 100 }}, { shot: false });*/
 
 module.exports = router;

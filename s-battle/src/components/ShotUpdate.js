@@ -91,6 +91,7 @@ export default class ShotUpdate extends Component {
    render() {
       return (
          <div>
+            <h2> Red - ship wound, Blue - no ship, Green - no shot </h2>
             <h1 className="font-weight-bold">SEA BATTLE</h1>
             <h1> U shot is X={this.state.fieldA} Y={this.state.fieldB} </h1>
             <form onSubmit={this.onSubmit} >
