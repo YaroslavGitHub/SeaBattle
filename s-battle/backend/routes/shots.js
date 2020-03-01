@@ -62,7 +62,7 @@ router.route('/findone/:id').post((req, res) => {
 
  router.route('/all').post((req, res) => {
    Shot
-   .updateMany( {_id: { $gte: 0, $lt: 100 }}, { ship: false }) 
+   .updateMany( {_id: { $lt: 100 }}, { shot: false })
    .updateMany( {_id: { $lte: 3 }}, { ship: true})
    .updateMany( {_id: 18}, { ship: true})
    .updateMany( {_id: { $gte: 25, $lte: 27 }}, { ship: true})
