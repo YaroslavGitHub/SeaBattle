@@ -121,7 +121,7 @@ export default class ShotUpdate extends Component {
             <div className="grid-container">
                <>
                   {this.state.seaMap.map(( shot ) => (
-                     <div><div style={{
+                     <div key={shot._id}><div style={{
                         color: ( shot.shot && shot.ship ) ? 'red'
                            : ( !shot.shot && shot.ship ) ? 'green'
                               : ( !shot.shot && !shot.ship ) ? 'green'

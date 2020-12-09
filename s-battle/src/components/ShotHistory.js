@@ -58,7 +58,7 @@ export default class ShotHistory extends Component {
             <div>
 
                {this.state.seaMap.map(( shot ) => (
-                  <div>{shot.description}</div>
+                  <div key={shot._id} >{shot.description}</div>
                ))}
 
 
